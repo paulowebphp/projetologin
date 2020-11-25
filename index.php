@@ -1,60 +1,30 @@
 <?php
+session_start();
 require_once("vendor/autoload.php");
 
 use \Slim\Slim;
-use \Main\Page;
-use \Main\PageAdmin;
-use \Main\PageDashboard;
-use \Main\Model\User;
+
 
 $app = new Slim();
 
+//em Produção, pode setar para False, ou Omitir/Comentar a linha
+$app->config('debug', true);
+
+
+//functions.php tem que ficar em cima de todas as outras rotas
+require_once("functions.php");
+
+
+require_once("admin-login.php");
+require_once("admin.php");
+
+
+require_once("dashboard.php");
 
 
 
-
-
-$app->get('/dashboard', function () {
-
-
-  $page = new PageDashboard();
-
-  $page->setTpl("index");
-
-
-});
-
-
-
-
-
-
-
-$app->get('/admin', function () {
-
-
-  $page = new PageAdmin();
-
-  $page->setTpl("index");
-
-
-});
-
-
-
-
-
-
-
-$app->get('/', function () {
-
-
-  $page = new Page();
-    
-    $page->setTpl("index");
-
-
-});
+require_once("site-login.php");
+require_once("site.php");
 
 
 

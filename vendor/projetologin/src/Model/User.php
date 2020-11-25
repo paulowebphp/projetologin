@@ -18,9 +18,13 @@ class User
 
         $results = $sql->select($query);
 
-        echo "<pre>";
-        var_dump($results);
-        exit;
+        if( count($results) > 0 )
+        {
+
+            return $results;
+
+
+        }//end if
 
 
     }//end method
