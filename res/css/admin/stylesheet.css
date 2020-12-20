@@ -119,24 +119,6 @@ body {
 
 
 
-
-
-
-
-#section1 {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-align: center;
-  align-items: center;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background-color: #f5f5f5;
-  min-height: 100vh;
-}
-
-
-
-
 .form-signin {
   width: 100%;
   max-width: 330px;
@@ -165,4 +147,49 @@ body {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#section1 {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+.lighter1{
+  font-weight: lighter;
+}
+
+
+
+
+.title1{
+
+  text-decoration: none;
+}
+
+.color1{
+  color: #212529;
+}
+
+.color1:hover{
+  color: #212529;
 }

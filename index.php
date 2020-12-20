@@ -15,14 +15,22 @@ $app->config('debug', true);
 require_once("functions.php");
 
 
+require_once("admin-recovery.php");
+require_once("admin-managers.php");
+require_once("admin-users.php");
 require_once("admin-login.php");
 require_once("admin.php");
+
+
 
 
 require_once("dashboard.php");
 
 
 
+
+require_once("site-endpoint.php");
+require_once("site-register.php");
 require_once("site-login.php");
 require_once("site.php");
 

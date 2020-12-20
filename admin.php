@@ -1,6 +1,9 @@
 <?php
 
 use \Main\PageAdmin;
+use \Main\Model\User;
+
+
 
 
 
@@ -8,13 +11,24 @@ use \Main\PageAdmin;
 
 $app->get('/487733admin', function () {
 
+  User::verifyLogin();
+
+  $user = User::getFromSession();
+  
+ 
+  
 
   $page = new PageAdmin();
 
-  $page->setTpl("index");
+  $page->setTpl("index", [
+
+    'user'=>$user->getData()
 
 
-});
+  ]);
+
+
+});//end route
   
 
 

@@ -1,0 +1,208 @@
+<div class="container-fluid">
+  <div class="row">
+
+    {include="dashboard-menu"} 
+
+    <main role="main" class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Dashboard - {$user.deslogin}</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group mr-2">
+            <form action="/487733admin/administrador">
+              <div class="input-group">
+
+
+                <input type="text" class="form-control pull-right" id="search" name="buscar" placeholder="Buscar" value="{$search}">
+
+                
+                <button type="submit" class="btn btn-search"><span data-feather="search"></span></button>
+
+
+              </div>
+            
+            
+            </form>
+
+
+          </div>
+          
+        </div>
+      </div>
+
+
+      <a class="title1 color1" href="/487733admin/administrador"><h2>Administrador</h2></a>
+
+      {if="$error"}
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {$error}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {/if}
+
+      {if="$success"}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {$success}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {/if}
+
+
+      <div class="table-responsive">
+        <table class="table table-striped table-sm">
+
+
+
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nome</th>
+              <th>Login</th>
+              
+              <th>Vendedor</th>
+              <th>Comprador</th>
+              <th>Status</th>
+              <th>Auto-Status</th>
+              <th>Data</th>
+              <th colspan="3">-</th>
+            </tr>
+          </thead>
+
+
+          
+          
+          
+          
+          
+
+
+
+          <tbody>
+
+
+
+            {loop="$results"}
+            <tr>
+              <td>{$value.iduser}</td>
+              <td>{$value.desperson}</td>
+              <td>{$value.deslogin}</td>
+              
+              <td>{if="$value.inseller == 1"}Sim{else}Não{/if}</td>
+              <td>{if="$value.inbuyer == 1"}Sim{else}Não{/if}</td>
+              <td>{if="$value.instatus == 1"}Ativo{else}Inativo{/if}</td>
+              <td>{if="$value.inautostatus == 1"}Ativo{else}Inativo{/if}</td>
+              <td>{function="formatDate($value.dtregister)"}</td>
+
+
+              <td>
+                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modal{$counter}">
+                  Visualizar
+                </button>
+                
+                
+                
+          
+              </td>
+
+
+              <td>
+                <a href='/487733admin/administrador/editar/{function="setHash($value.iduser)"}'>
+                  <button class="btn btn-secondary">
+                    Editar
+                  </button>
+
+                </a>           
+                
+              </td>
+
+              <td>
+                <a href='/487733admin/administrador/mudar-senha/{function="setHash($value.iduser)"}'>
+                  <button class="btn btn-warning">
+                    Mudar Senha
+                  </button>
+
+                </a>
+              </td>
+              
+             
+              <div class="modal fade" id="modal{$counter}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Visualizar Usuário</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <h5>ID: <span class="lighter1">{$value.iduser}</span></h5>
+                      <h5>Nome: <span class="lighter1">{$value.desperson}</span></h5>
+                      <h5>Apelido: <span class="lighter1">{$value.desnick}</span></h5>
+                      <h5>Login: <span class="lighter1">{$value.deslogin}</span></h5>
+                      <h5>Admin: <span class="lighter1">{if="$value.inadmin == 1"}Sim{else}Não{/if}</span></h5>
+                      <h5>Vendedor: <span class="lighter1">{if="$value.inseller == 1"}Sim{else}Não{/if}</span></h5>
+                      <h5>Comprador: <span class="lighter1">{if="$value.inbuyer == 1"}Sim{else}Não{/if}</span></h5>
+                      <h5>Cadastrado: <span class="lighter1">{if="$value.inregister == 1"}Sim{else}Não{/if}</span></h5>
+                      <h5>Status: <span class="lighter1">{if="$value.instatus == 1"}Ativo{else}Inativo{/if}</span></h5>
+                      <h5>Auto-Status: <span class="lighter1">{if="$value.inautostatus == 1"}Ativo{else}Inativo{/if}</span></h5>
+                      <h5>Aceitou Termos: <span class="lighter1">{if="$value.inautostatus == 1"}Sim{else}Não{/if}</span></h5>
+                      <h5>IP Termos: <span class="lighter1">{$value.desipterms}</span></h5>
+                      <h5>Data Termos: <span class="lighter1">{function="formatDate($value.dtterms)"}</span></h5>
+
+                      <h5>Email: <span class="lighter1">{$value.desemail}</span></h5>
+                      <h5>Telefone: <span class="lighter1">({$value.nrddd}) {$value.nrphone}</span></h5>
+                      <h5>{if="$value.intypedoc == 0"}CPF{else}CNPJ{/if}:  <span class="lighter1">{$value.desdocument}</span></h5>
+                      <h5>Data Nascimento: <span class="lighter1">{function="formatDate($value.dtbirth)"}</span></h5>
+
+                      
+                      
+
+
+
+
+                      <h5>Data Cadastro: <span class="lighter1">{function="formatDate($value.dtregister)"}</span></h5>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              
+
+             
+
+            </tr>
+
+            {/loop}
+
+
+
+
+
+
+
+
+          </tbody>
+
+
+
+
+        </table>
+      </div>
+
+
+
+      <nav aria-label="...">
+        <ul class="pagination pagination-sm">
+          {loop="$pages"}
+          <li class="page-item"><a class="page-link" href="{$value.href}">{$value.page_number}</a></li>
+          {/loop}
+        </ul>
+      </nav>
+
+ 
+
+    </main>
+
+    
+  </div>
+</div>

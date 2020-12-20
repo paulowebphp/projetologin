@@ -10,7 +10,8 @@
 
    
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
 
 
@@ -35,15 +36,21 @@
     <link href="/res/css/site/stylesheet.css" rel="stylesheet">
   </head>
   <body class="text-center">
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <div class="d-flex w-100 h-100 p-3 mx-auto flex-column">
   <header class="masthead mb-auto">
-    <div class="inner">
-      <h3 class="masthead-brand">Cover</h3>
-      <nav class="nav nav-masthead justify-content-center">
-        <a class="nav-link active" href="#">Home</a>
-        <a class="nav-link" href="#">Features</a>
-        <a class="nav-link" href="/login">Login</a>
-      </nav>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="inner">
+            <h3 class="masthead-brand"><a href="/">Cover</a></h3>
+            <nav class="nav nav-masthead justify-content-center">
+              <a class="nav-link active" href="/">Home</a>
+              <a class="nav-link" href="/sobre">Sobre</a>
+              <a class="nav-link" href="/login">Login</a>
+            </nav>
+          </div>
+        </div>
+      </div>
     </div>
   </header>
   

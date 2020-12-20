@@ -1,0 +1,20 @@
+string(14) "joao@gmail.com"
+array(2) {
+  [0]=>
+  string(4) "joao"
+  [1]=>
+  string(9) "gmail.com"
+}
+
+
+
+
+$emailString[0] > 'j'
+$emailString[strlen($emailString)-1]
+substr($emailString, -1)
+
+$emailArray[0] > joao
+
+$emailArray[0][0] > 'j'
+$emailArray[0][strlen($emailArray[0])-1] > 'o'
+substr($emailArray[0], -1) > o
