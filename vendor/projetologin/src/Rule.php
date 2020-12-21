@@ -21,7 +21,9 @@ class Rule extends Model
     const ERROR_CURRENT_PASS = "Preencha a senha atual";
     const VERIFY_CURRENT_PASS = "A sua nova senha deve ser diferente da atual | Por favor, tente novamente";
     const VERIFY_PASSWORD = "A senha atual informada é inválida | Por favor, tente novamente";
-    const ERROR_RECOVERY = "O email informado é inválido | Por favor, tente novamente";
+    const ERROR_SET_RECOVERY = "O email informado é inválido | Por favor, tente novamente";
+
+    const ERROR_GET_RECOVERY = "Houve um erro inesperado | Por favor, volte no Email e clique novamente no Link que você recebveu | Caso o erro persista, aguarde aproximadamente 60 minutos e peça uma nova Recuperação de Senha ou entre em contato com o Suporte";
     
 
     const ERROR_USER = "Usuário inválido";
@@ -42,6 +44,8 @@ class Rule extends Model
     const URI_RECOVERY_SENT = "redefinir";
 
     const EMAIL_RECOVERY_SUBJECT = "Recuperação de Senha";
+
+    
 
 
 }//end Class

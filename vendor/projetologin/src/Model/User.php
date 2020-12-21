@@ -571,7 +571,7 @@ class User extends Model
         if( count( $results ) === 0 )
         {
 
-            throw new \Exception( Rule::ERROR_RECOVERY );
+            throw new \Exception( Rule::ERROR_SET_RECOVERY );
 
 
         }//end if
@@ -602,7 +602,7 @@ class User extends Model
             if( count( $results2 ) === 0 )
             {
 
-                throw new \Exception( Rule::ERROR_RECOVERY );
+                throw new \Exception( Rule::ERROR_SET_RECOVERY );
 
 
             }//end if
@@ -659,7 +659,7 @@ class User extends Model
                     
                 }//end else
 
-
+                
                 
                 
                 $mailer = new Mailer(
@@ -719,6 +719,300 @@ class User extends Model
 
 
     }//end method
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static function getRecovery( $code )
+    {
+
+
+        
+        $ivAndEncryptedMessage = base64_decode( $code );
+
+
+        $iv = mb_substr(
+
+            $ivAndEncryptedMessage,
+
+            0,
+
+            openssl_cipher_iv_length( 'AES-256-CBC' ),
+
+            '8bit'
+
+
+        );
+
+
+
+
+
+
+        $encryptedMessage = mb_substr(
+
+            $ivAndEncryptedMessage,
+
+            openssl_cipher_iv_length( 'AES-256-CBC' ),
+
+            null,
+
+            '8bit'
+
+
+        );
+
+
+
+
+
+        $idrecovery = openssl_decrypt(
+
+
+            $encryptedMessage,
+
+            'AES-256-CBC',
+
+            User::SECRET,
+
+            0,
+
+            $iv
+
+
+        );
+
+
+
+        if( (int)$idrecovery === 0 )
+        {
+
+            throw new \Exception( Rule::ERROR_GET_RECOVERY );
+
+
+        }//end if
+        else
+        {
+
+
+            $sql = new Sql();
+
+            $query = "
+            
+                SELECT * FROM tb_recoveries a
+                INNER JOIN tb_users b ON a.iduser = b.iduser
+                INNER JOIN tb_persons c ON b.idperson = c.idperson
+                WHERE a.idrecovery = :idrecovery AND
+                a.dtrecovery IS NULL AND
+                DATE_ADD( a.dtregister, INTERVAL 1 HOUR ) >= NOW();
+            
+            
+            ";
+
+            $results = $sql->select( $query, [
+
+                ':idrecovery'=>$idrecovery
+
+
+            ]);
+
+            
+            
+
+            if( count( $results ) === 0 )
+            {
+
+                throw new \Exception( Rule::ERROR_GET_RECOVERY );
+
+
+            }//end if
+            else
+            {
+
+                return $results[0];
+
+
+            }//end else
+            
+
+
+        }//end else
+                
+
+
+
+        
+
+
+
+        
+
+
+
+    }//end method
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static function setDateRecovery( $idrecovery )
+    {
+
+
+        $sql = new Sql();
+
+        $query = "
+        
+            UPDATE tb_recoveries
+            SET dtrecovery = NOW()
+            WHERE idrecovery = :idrecovery;
+        
+        
+        ";
+
+        $sql->query( $query, [
+
+
+            ':idrecovery'=>$idrecovery
+
+
+        ]);
+
+
+
+
+    }//end method
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

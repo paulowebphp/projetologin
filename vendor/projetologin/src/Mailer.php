@@ -75,22 +75,15 @@ class Mailer
             $this->mail = new \PHPMailer();
             //Tell PHPMailer to use SMTP
             $this->mail->isSMTP();
-
             /*
-            $this->mail->SMTPOptions = array(
-			
-				'ssl' => array(
-
-					'verify_peer' => false,
-					'verify_peer_name' => false,
-					'allow_self_signed' => true
-
-				)
-
-            );
+                $this->mail->SMTPOptions = array(
+                    'ssl' => array(
+                        'verify_peer' => false,
+                        'verify_peer_name' => false,
+                        'allow_self_signed' => true
+                    )
+                );
             */
-
-
             //Enable SMTP debugging
             // SMTP::DEBUG_OFF = off (for production use)
             // SMTP::DEBUG_CLIENT = client messages
