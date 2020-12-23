@@ -10,9 +10,11 @@ class Rule extends Model
 
     const ERROR_EMAIL = "Informe o seu e-mail";
     const VALIDATE_EMAIL = "O email parece estar num formato inválido | Por favor, tente novamente";
+    const VERIFY_EMAIL_CONFIRM = "Os emails informados precisam ser iguais | Por favor, tente novamente";
+    const ERROR_INTERMS = 'Por favor, marque o checkbox se estiver de acordo com Termos de Uso';
+
 
     const ERROR_PASSWORD = "Preencha a senha";
-    
     const VALIDATE_VERIFY_PASSWORD_CONFIRM = "A nova senha e a confirmação são diferentes | Por favor, tente novamente";
     const PASSWORD_LENGHT_MIN = 6;
     const PASSWORD_LENGHT_MAX = 20;
@@ -21,8 +23,8 @@ class Rule extends Model
     const ERROR_CURRENT_PASS = "Preencha a senha atual";
     const VERIFY_CURRENT_PASS = "A sua nova senha deve ser diferente da atual | Por favor, tente novamente";
     const VERIFY_PASSWORD = "A senha atual informada é inválida | Por favor, tente novamente";
+    
     const ERROR_SET_RECOVERY = "O email informado é inválido | Por favor, tente novamente";
-
     const ERROR_GET_RECOVERY = "Houve um erro inesperado | Por favor, volte no Email e clique novamente no Link que você recebveu | Caso o erro persista, aguarde aproximadamente 60 minutos e peça uma nova Recuperação de Senha ou entre em contato com o Suporte";
     
 

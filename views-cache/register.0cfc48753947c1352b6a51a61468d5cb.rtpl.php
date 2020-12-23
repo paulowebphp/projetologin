@@ -19,28 +19,38 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <form class="form-signin">
+                <form class="form-signin" action="/cadastrar" method="post">
                     <!--<img class="mb-4" src="/docs/4.5/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
                     <h1 class="h3 mb-3 font-weight-normal">Crie Sua Conta!</h1>
-                    <label for="inputEmail" class="sr-only">Email address</label>
-                    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
 
-                    <label for="inputEmail" class="sr-only">Email address</label>
-                    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                    <?php if( $error ){ ?>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                      <?php echo htmlspecialchars( $error, ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <?php } ?>
+                    
 
-                    <label for="inputEmail" class="sr-only">Email address</label>
-                    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                    <label for="desperson" class="sr-only">Nome</label>
+                    <input type="email" id="desperson" name="desperson" class="form-control" placeholder="Seu nome completo" required autofocus>
+                    
 
+                    <label for="deslogin" class="sr-only">Email</label>
+                    <input type="email" id="deslogin" name="deslogin" class="form-control" placeholder="Email" required autofocus>
 
-                    <label for="inputPassword" class="sr-only">Password</label>
-                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                    <label for="deslogin_confirm" class="sr-only">Confirme seu Email</label>
+                    <input type="email" id="deslogin_confirm" name="deslogin_confirm" class="form-control" placeholder="Confirme seu Email" required autofocus>
+
+                    <label for="despassword" class="sr-only">Senha</label>
+                    <input type="password" id="despassword" name="despassword" class="form-control" placeholder="Senha" required>
+
+                    
                     <div class="checkbox mb-3">
                       <label>
-                        <input type="checkbox" value="remember-me"> Aceito os Termos de Uso
+                        <input type="checkbox" id="interms" name="interms" value="0">&nbsp;&nbsp;Li e Aceito os <a target="_blank" href="/termos">Termos de Uso</a>
                       </label>
                     </div>
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-                    <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Criar Conta</button>
                   </form>
             </div>
         </div>

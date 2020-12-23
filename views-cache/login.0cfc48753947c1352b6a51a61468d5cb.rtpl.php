@@ -21,23 +21,26 @@
             <div class="col-12">
                 <form class="form-signin" action="/login" method="post">
                     <!--<img class="mb-4" src="/docs/4.5/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
-                    <h1 class="h3 mb-3 font-weight-normal">Loginn</h1>
+                    <h1 class="h3 mb-3 font-weight-normal">Login</h1>
 
+                    <div class="mb-3">
+                      <a href="/cadastrar">(Não tem conta ainda? Crie a sua!)</a>
+                    </div>
+
+                    <?php if( $error ){ ?>
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                       <?php echo htmlspecialchars( $error, ENT_COMPAT, 'UTF-8', FALSE ); ?>
                       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-
                     </div>
-                    
+                    <?php } ?>
+
 
                     <label for="deslogin" class="sr-only">Email</label>
                     <input type="email" name="deslogin" id="deslogin" class="form-control" placeholder="Email" required autofocus>
                     <label for="despassword" class="sr-only">Senha</label>
                     <input type="password" name="despassword" id="despassword" class="form-control" placeholder="Senha" required>
-                    <div class="checkbox mb-3">
-                      <label>
-                        <input type="checkbox" value="remember-me"> Remember me
-                      </label>
+                    <div class="mb-3">
+                      <a href="/recuperar-senha">Esqueceu sua Senha?</a>
                     </div>
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
                   </form>
