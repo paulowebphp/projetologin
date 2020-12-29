@@ -1,4 +1,4 @@
-<?php if(!class_exists('Rain\Tpl')){exit;}?><style>
+<style>
   .bd-placeholder-img {
       font-size: 1.125rem;
       text-anchor: middle;
@@ -23,23 +23,23 @@
                   <!--<img class="mb-4" src="/docs/4.5/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
                   <h1 class="h3 mb-3 font-weight-normal">Crie Sua Conta!</h1>
 
-                  <?php if( $error ){ ?>
+                  {if="$error"}
                   <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <?php echo htmlspecialchars( $error, ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                    {$error}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                   </div>
-                  <?php } ?>
+                  {/if}
                   
 
                   <label for="desperson" class="sr-only">Nome</label>
-                  <input type="text" id="desperson" name="desperson" class="form-control" placeholder="Seu nome completo" value="<?php echo htmlspecialchars( $session_values["desperson"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" required autofocus>
+                  <input type="text" id="desperson" name="desperson" class="form-control" placeholder="Seu nome completo" value="{$session_values.desperson}" required autofocus>
                   
 
                   <label for="deslogin" class="sr-only">Email</label>
-                  <input type="email" id="deslogin" name="deslogin" class="form-control" placeholder="Email" value="<?php echo htmlspecialchars( $session_values["deslogin"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" required autofocus>
+                  <input type="email" id="deslogin" name="deslogin" class="form-control" placeholder="Email" value="{$session_values.deslogin}" required autofocus>
 
                   <label for="deslogin_confirm" class="sr-only">Confirme seu Email</label>
-                  <input type="email" id="deslogin_confirm" name="deslogin_confirm" class="form-control" placeholder="Confirme seu Email" value="<?php echo htmlspecialchars( $session_values["deslogin_confirm"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" required autofocus>
+                  <input type="email" id="deslogin_confirm" name="deslogin_confirm" class="form-control" placeholder="Confirme seu Email" value="{$session_values.deslogin_confirm}" required autofocus>
 
                   <label for="despassword" class="sr-only">Senha</label>
                   <input type="password" id="despassword" name="despassword" class="form-control" placeholder="Senha" required>

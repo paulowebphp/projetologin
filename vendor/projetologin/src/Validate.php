@@ -1332,6 +1332,251 @@ class Validate
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static function validateFullName( $value )
+    {
+
+
+        $value = trim( $value );
+
+
+        if (  $value != ''  ) 
+        {
+
+            if ( preg_match( '/\\s/', $value ) ) 
+            {
+
+                return true;
+                
+            } //end if
+            else 
+            {
+
+                return false;
+                
+            }//end else
+            
+            
+        } //end if
+        else 
+        {
+
+            return false;
+            
+        }//end else
+        
+
+
+
+    } //end method
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static function sanitizeNickname( $value )
+    {
+
+
+        $value = trim( $value );
+
+
+        if (  $value != ''  ) 
+        {
+
+            $nickArray = explode( ' ', $value );
+
+            return $nickArray[0];
+            
+            
+        } //end if
+        else 
+        {
+
+            return false;
+            
+        }//end else
+        
+
+
+
+    } //end method
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
 
 

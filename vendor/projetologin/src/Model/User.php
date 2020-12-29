@@ -20,6 +20,8 @@ class User extends Model
 
     const SECRET = "projetologin-user-secret";
 
+    const SESSION_VALUES = "projetologin-session-values";
+
 
 
 
@@ -52,7 +54,7 @@ class User extends Model
 
             if((bool)User::checkLogin()) User::logout();
 
-            throw new \Exception( "Usuário inexistente ou senha inválida" );
+            throw new \Exception( Rule::ERROR_LOGIN );
 
         }//end if
 
@@ -68,6 +70,26 @@ class User extends Model
 
             $user->setData($dataUser);
 
+
+
+            if(
+
+                (int)$user->getinadmin() === 0
+                &&
+                (int)$user->getinregister() === 0
+
+
+            )
+            {
+
+                $user->setRegister();
+                $user->setinregister(1);
+                $user->update();
+
+            }//end if
+
+
+
             
             $user->setToSession();
 
@@ -80,7 +102,7 @@ class User extends Model
 
             User::logout();
 
-            throw new \Exception( "Usuário inexistente ou senha inválida" );
+            throw new \Exception( Rule::ERROR_LOGIN );
 
             
         }//end else
@@ -1031,6 +1053,118 @@ class User extends Model
 
 
 
+
+
+
+
+
+
+
+
+
+    public static function checkLoginExists( $deslogin )
+    {
+
+
+        $sql = new Sql();
+
+        $query = "
+        
+        
+            SELECT * FROM tb_users
+            WHERE deslogin = :deslogin
+            ORDER BY dtregister DESC
+            LIMIT 1;
+        
+        
+        
+        ";
+
+        $results = $sql->select( $query, [
+
+            ':deslogin'=>$deslogin
+
+
+        ]);
+
+
+        return ( count( $results ) > 0 );
+
+
+
+
+
+    }//end method
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
    
 
 
@@ -1384,6 +1518,9 @@ class User extends Model
         )";
 
 
+        
+        
+
         $results = $sql->select( $query, [
 
             ':iduser'=>$this->getiduser(),
@@ -1410,6 +1547,8 @@ class User extends Model
 
 
         ]);
+
+        
 
 
 
@@ -2062,6 +2201,177 @@ class User extends Model
 
 
     }//end method
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function setRegister()
+    {
+
+
+
+        $address = new Address();
+        $address->get( (int)$this->getiduser() );
+
+
+        
+
+
+
+        $address->setData([
+
+            'idaddress'=>$address->getidaddress(),
+            'iduser'=>$this->getiduser(),
+            'deszipcode'=>NULL,
+            'desaddress'=>NULL,
+            'desnumber'=>NULL,
+            'descomplement'=>NULL,
+            'desdistrict'=>NULL,
+            'idcity'=>NULL,
+            'descity'=>NULL,
+            'idstate'=>NULL,
+            'desstate'=>NULL,
+            'desstatecode'=>NULL,
+            'descountry'=>NULL,
+            'descountrycode'=>NULL
+
+
+        ]);
+
+
+
+        $address->update();
+
+
+        
+
+
+        if( (int)$address->getidaddress() === 0 )
+        {
+            throw new \Exception( Rule::ERROR_SET_REGISTER );
+
+        }//end if
+
+
+
+
+
+
+
+
+
+        
+        
+
+
+
+
+
+
+    }//end method
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
