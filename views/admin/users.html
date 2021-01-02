@@ -139,7 +139,7 @@
                       <h5>Admin: <span class="lighter1">{if="$value.inadmin == 1"}Sim{else}Não{/if}</span></h5>
                       <h5>Vendedor: <span class="lighter1">{if="$value.inseller == 1"}Sim{else}Não{/if}</span></h5>
                       <h5>Comprador: <span class="lighter1">{if="$value.inbuyer == 1"}Sim{else}Não{/if}</span></h5>
-                      <h5>Cadastrado: <span class="lighter1">{if="$value.inregister == 1"}Sim{else}Não{/if}</span></h5>
+                      <h5>Passou pelo Cadastrar? <span class="lighter1">{if="$value.inregister == 1"}Sim{else}Não{/if}</span></h5>
                       <h5>Status: <span class="lighter1">{if="$value.instatus == 1"}Ativo{else}Inativo{/if}</span></h5>
                       <h5>Auto-Status: <span class="lighter1">{if="$value.inautostatus == 1"}Ativo{else}Inativo{/if}</span></h5>
                       <h5>Aceitou Termos: <span class="lighter1">{if="$value.inautostatus == 1"}Sim{else}Não{/if}</span></h5>
@@ -147,13 +147,71 @@
                       <h5>Data Termos: <span class="lighter1">{function="formatDate($value.dtterms)"}</span></h5>
 
                       <h5>Email: <span class="lighter1">{$value.desemail}</span></h5>
-                      <h5>Telefone: <span class="lighter1">({$value.nrddd}) {$value.nrphone}</span></h5>
-                      <h5>{if="$value.intypedoc == 0"}CPF{else}CNPJ{/if}:  <span class="lighter1">{$value.desdocument}</span></h5>
-                      <h5>Data Nascimento: <span class="lighter1">{function="formatDate($value.dtbirth)"}</span></h5>
 
-                      <h5>CEP: <span class="lighter1">{$value.deszipcode}</span></h5>
-                      <h5>Endereço: <span class="lighter1">{$value.desaddress}, {$value.desnumber} - {$value.descomplement} - {$value.desdistrict} - {$value.descity} - {$value.desstatecode}</span></h5>
-                      
+                      <h5>
+                        Telefone: 
+                        <span class="lighter1">
+                          {if="$value.nrphone != ''"}
+                            ({$value.nrddd}) {$value.nrphone}
+                          {else}
+                            Não informado.
+                          {/if}                          
+                        </span>
+                      </h5>
+
+
+                      <h5>
+                        {if="$value.intypedoc == 0"}CPF{else}CNPJ{/if}:
+                        <span class="lighter1">
+                          {if="$value.desdocument != ''"}
+                            {$value.desdocument}
+                          {else}
+                            Não informado.
+                          {/if}                          
+                        </span>
+                      </h5>
+
+
+
+                      <h5>
+                        Data Nascimento: 
+                        <span class="lighter1">
+                          {if="$value.dtbirth != ''"}
+                            {function="formatDate($value.dtbirth)"}
+                          {else}
+                            Não informado.
+                          {/if}                          
+                        </span>
+                      </h5>
+
+
+
+                      <h5>
+                        CEP:
+                        <span class="lighter1">
+                          {if="$value.deszipcode != ''"}
+                            {$value.deszipcode}
+                          {else}
+                            Não informado.
+                          {/if}                          
+                        </span>
+                      </h5>
+
+
+                      <h5>
+                        Endereço: 
+                        <span class="lighter1">
+                          {if="$value.desaddress != ''"}
+                            {$value.desaddress}, {$value.desnumber} - {$value.descomplement} - {$value.desdistrict} - {$value.descity} - {$value.desstatecode}
+                          {else}
+                            Não informado.
+                          {/if}                          
+                        </span>
+                      </h5>
+
+
+               
+                                    
 
 
 

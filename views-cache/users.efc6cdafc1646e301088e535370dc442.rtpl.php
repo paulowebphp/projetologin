@@ -139,7 +139,7 @@
                       <h5>Admin: <span class="lighter1"><?php if( $value1["inadmin"] == 1 ){ ?>Sim<?php }else{ ?>Não<?php } ?></span></h5>
                       <h5>Vendedor: <span class="lighter1"><?php if( $value1["inseller"] == 1 ){ ?>Sim<?php }else{ ?>Não<?php } ?></span></h5>
                       <h5>Comprador: <span class="lighter1"><?php if( $value1["inbuyer"] == 1 ){ ?>Sim<?php }else{ ?>Não<?php } ?></span></h5>
-                      <h5>Cadastrado: <span class="lighter1"><?php if( $value1["inregister"] == 1 ){ ?>Sim<?php }else{ ?>Não<?php } ?></span></h5>
+                      <h5>Passou pelo Cadastrar? <span class="lighter1"><?php if( $value1["inregister"] == 1 ){ ?>Sim<?php }else{ ?>Não<?php } ?></span></h5>
                       <h5>Status: <span class="lighter1"><?php if( $value1["instatus"] == 1 ){ ?>Ativo<?php }else{ ?>Inativo<?php } ?></span></h5>
                       <h5>Auto-Status: <span class="lighter1"><?php if( $value1["inautostatus"] == 1 ){ ?>Ativo<?php }else{ ?>Inativo<?php } ?></span></h5>
                       <h5>Aceitou Termos: <span class="lighter1"><?php if( $value1["inautostatus"] == 1 ){ ?>Sim<?php }else{ ?>Não<?php } ?></span></h5>
@@ -147,13 +147,71 @@
                       <h5>Data Termos: <span class="lighter1"><?php echo formatDate($value1["dtterms"]); ?></span></h5>
 
                       <h5>Email: <span class="lighter1"><?php echo htmlspecialchars( $value1["desemail"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span></h5>
-                      <h5>Telefone: <span class="lighter1">(<?php echo htmlspecialchars( $value1["nrddd"], ENT_COMPAT, 'UTF-8', FALSE ); ?>) <?php echo htmlspecialchars( $value1["nrphone"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span></h5>
-                      <h5><?php if( $value1["intypedoc"] == 0 ){ ?>CPF<?php }else{ ?>CNPJ<?php } ?>:  <span class="lighter1"><?php echo htmlspecialchars( $value1["desdocument"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span></h5>
-                      <h5>Data Nascimento: <span class="lighter1"><?php echo formatDate($value1["dtbirth"]); ?></span></h5>
 
-                      <h5>CEP: <span class="lighter1"><?php echo htmlspecialchars( $value1["deszipcode"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span></h5>
-                      <h5>Endereço: <span class="lighter1"><?php echo htmlspecialchars( $value1["desaddress"], ENT_COMPAT, 'UTF-8', FALSE ); ?>, <?php echo htmlspecialchars( $value1["desnumber"], ENT_COMPAT, 'UTF-8', FALSE ); ?> - <?php echo htmlspecialchars( $value1["descomplement"], ENT_COMPAT, 'UTF-8', FALSE ); ?> - <?php echo htmlspecialchars( $value1["desdistrict"], ENT_COMPAT, 'UTF-8', FALSE ); ?> - <?php echo htmlspecialchars( $value1["descity"], ENT_COMPAT, 'UTF-8', FALSE ); ?> - <?php echo htmlspecialchars( $value1["desstatecode"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span></h5>
-                      
+                      <h5>
+                        Telefone: 
+                        <span class="lighter1">
+                          <?php if( $value1["nrphone"] != '' ){ ?>
+                            (<?php echo htmlspecialchars( $value1["nrddd"], ENT_COMPAT, 'UTF-8', FALSE ); ?>) <?php echo htmlspecialchars( $value1["nrphone"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                          <?php }else{ ?>
+                            Não informado.
+                          <?php } ?>                          
+                        </span>
+                      </h5>
+
+
+                      <h5>
+                        <?php if( $value1["intypedoc"] == 0 ){ ?>CPF<?php }else{ ?>CNPJ<?php } ?>:
+                        <span class="lighter1">
+                          <?php if( $value1["desdocument"] != '' ){ ?>
+                            <?php echo htmlspecialchars( $value1["desdocument"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                          <?php }else{ ?>
+                            Não informado.
+                          <?php } ?>                          
+                        </span>
+                      </h5>
+
+
+
+                      <h5>
+                        Data Nascimento: 
+                        <span class="lighter1">
+                          <?php if( $value1["dtbirth"] != '' ){ ?>
+                            <?php echo formatDate($value1["dtbirth"]); ?>
+                          <?php }else{ ?>
+                            Não informado.
+                          <?php } ?>                          
+                        </span>
+                      </h5>
+
+
+
+                      <h5>
+                        CEP:
+                        <span class="lighter1">
+                          <?php if( $value1["deszipcode"] != '' ){ ?>
+                            <?php echo htmlspecialchars( $value1["deszipcode"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                          <?php }else{ ?>
+                            Não informado.
+                          <?php } ?>                          
+                        </span>
+                      </h5>
+
+
+                      <h5>
+                        Endereço: 
+                        <span class="lighter1">
+                          <?php if( $value1["desaddress"] != '' ){ ?>
+                            <?php echo htmlspecialchars( $value1["desaddress"], ENT_COMPAT, 'UTF-8', FALSE ); ?>, <?php echo htmlspecialchars( $value1["desnumber"], ENT_COMPAT, 'UTF-8', FALSE ); ?> - <?php echo htmlspecialchars( $value1["descomplement"], ENT_COMPAT, 'UTF-8', FALSE ); ?> - <?php echo htmlspecialchars( $value1["desdistrict"], ENT_COMPAT, 'UTF-8', FALSE ); ?> - <?php echo htmlspecialchars( $value1["descity"], ENT_COMPAT, 'UTF-8', FALSE ); ?> - <?php echo htmlspecialchars( $value1["desstatecode"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                          <?php }else{ ?>
+                            Não informado.
+                          <?php } ?>                          
+                        </span>
+                      </h5>
+
+
+               
+                                    
 
 
 

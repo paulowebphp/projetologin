@@ -12,9 +12,7 @@ use \Main\Model\User;
 
 $app->post('/cadastrar', function () {
 
-
-
-  $_SESSION[User::SESSION_VALUES] = $_POST;
+  $_SESSION[User::REGISTER_VALUES] = $_POST;
 
 
   if( !isset($_POST['desperson']) || $_POST['desperson'] == '' )
@@ -332,10 +330,8 @@ $app->post('/cadastrar', function () {
 
     $user->update();
 
-
-    if( isset( $_SESSION[User::SESSION_VALUES] ) ) unset($_SESSION[User::SESSION_VALUES]);
-
-
+    
+    if( isset( $_SESSION[User::REGISTER_VALUES] ) ) unset( $_SESSION[User::REGISTER_VALUES] );
 
 
 
@@ -439,16 +435,34 @@ $app->post('/cadastrar', function () {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 $app->get('/cadastrar', function () {
 
-  
+
 
   $page = new Page();
     
     $page->setTpl("register",[
 
       'error'=>User::getError(),
-      'session_values'=>( isset( $_SESSION[User::SESSION_VALUES] ) ) ? $_SESSION[User::SESSION_VALUES] : [ 'desperson'=>'','deslogin'=>'','deslogin_confirm'=>'' ]
+      'register_values'=>( isset( $_SESSION[User::REGISTER_VALUES] ) ) ? $_SESSION[User::REGISTER_VALUES] : [
+
+        'desperson'=>'',
+        'deslogin'=>'',
+        'deslogin_confirm'=>''
+
+      ]
 
     ]);
 

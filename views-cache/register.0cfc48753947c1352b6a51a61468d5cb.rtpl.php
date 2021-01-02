@@ -32,14 +32,14 @@
                   
 
                   <label for="desperson" class="sr-only">Nome</label>
-                  <input type="text" id="desperson" name="desperson" class="form-control" placeholder="Seu nome completo" value="<?php echo htmlspecialchars( $session_values["desperson"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" required autofocus>
+                  <input type="text" id="desperson" name="desperson" class="form-control" placeholder="Seu nome completo" value="<?php echo htmlspecialchars( $register_values["desperson"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" required autofocus>
                   
 
                   <label for="deslogin" class="sr-only">Email</label>
-                  <input type="email" id="deslogin" name="deslogin" class="form-control" placeholder="Email" value="<?php echo htmlspecialchars( $session_values["deslogin"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" required autofocus>
+                  <input type="email" id="deslogin" name="deslogin" class="form-control" placeholder="Email" value="<?php echo htmlspecialchars( $register_values["deslogin"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" required autofocus>
 
                   <label for="deslogin_confirm" class="sr-only">Confirme seu Email</label>
-                  <input type="email" id="deslogin_confirm" name="deslogin_confirm" class="form-control" placeholder="Confirme seu Email" value="<?php echo htmlspecialchars( $session_values["deslogin_confirm"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" required autofocus>
+                  <input type="email" id="deslogin_confirm" name="deslogin_confirm" class="form-control" placeholder="Confirme seu Email" value="<?php echo htmlspecialchars( $register_values["deslogin_confirm"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" required autofocus>
 
                   <label for="despassword" class="sr-only">Senha</label>
                   <input type="password" id="despassword" name="despassword" class="form-control" placeholder="Senha" required>

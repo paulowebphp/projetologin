@@ -20,7 +20,10 @@ class User extends Model
 
     const SECRET = "projetologin-user-secret";
 
-    const SESSION_VALUES = "projetologin-session-values";
+    const REGISTER_VALUES = "projetologin-register-values";
+
+
+
 
 
 
@@ -1371,9 +1374,6 @@ class User extends Model
 
 
 
-
-
-
     public static function clearError()
     {
 
@@ -1445,12 +1445,6 @@ class User extends Model
         $_SESSION[User::SUCCESS] = NULL;
 
     }//end method
-
-
-
-
-
-
 
 
 
