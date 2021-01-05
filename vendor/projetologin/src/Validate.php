@@ -1127,6 +1127,9 @@ class Validate
         
         $value = trim($value);
 
+    
+            
+
 
         if ( $value == '' && $may_be_empty === true ) 
         {
@@ -1169,12 +1172,14 @@ class Validate
         elseif( Validate::sanitizeTagScript( $value ) )
         {   
             
+            
+            
 
 
             if ( preg_match( '/^[A-Za-z0-9\ç\Ç\s\_\-\á\Á\à\À\ã\Ã\â\Â\ä\Ä\é\É\è\È\ê\Ê\ë\Ë\í\Í\ì\Ì\î\Î\ï\Ï\ó\Ó\ô\Ô\õ\Õ\ò\Ò\ö\Ö\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ\!\?\@\#\$\%\&\*\+\,\.\;\(\)\{\}\=\+\:\>\<\'\*]+$/', $value ) ) 
             {
 
-       
+                
                 
                 if( $may_have_accent === false && preg_match( '/[\á\Á\à\À\ã\Ã\â\Â\ä\Ä\é\É\è\È\ê\Ê\ë\Ë\í\Í\ì\Ì\î\Î\ï\Ï\ó\Ó\ô\Ô\õ\Õ\ò\Ò\ö\Ö\ú\Ú\ù\Ù\û\Û\ü\Ü\ñ\Ñ]/', $value ) )
                 {
@@ -1195,7 +1200,7 @@ class Validate
 
                 }//end if
 
-
+                
 
                 if( $may_have_number === false && preg_match( '/[0-9]/', $value ) )
                 {
@@ -1215,7 +1220,8 @@ class Validate
 
                 }//end if
 
-
+                
+                
 
 
                 if( $may_have_special_character === false && preg_match( '/[\!\?\@\#\$\%\&\*\+\,\.\;\(\)\{\}\=\+\:\>\<\'\*]/', $value ) )
@@ -1327,7 +1333,143 @@ class Validate
 
 
 
-    }//end if
+    }//end method
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static function validateLength( $value, $max, $min = 3 )
+    {
+
+        $length = strlen($value);
+
+
+     
+
+        if (
+
+            (int)$length <= (int)$max
+            &&
+            (int)$length >= (int)$min
+
+        ) 
+        {
+            
+
+            return true;
+
+
+            
+        } //end if
+        else 
+        {
+
+            return false;
+            
+        }//end else
+        
+
+
+    }//end method
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1398,6 +1540,1227 @@ class Validate
 
 
     } //end method
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static function validateDate( $date, $interval )
+    {
+
+
+        
+
+        if ( (bool)preg_match( '/^([0-9]{4})[-]([0-9]{2})[-]([0-9]{2})$/', $date ) ) 
+        {
+
+            
+            $timezone = new \DateTimeZone( 'America/Sao_Paulo' );
+
+
+            $dt_min = new \DateTime( 'now - '.Rule::DATE_MIN.' year' );
+            $dt_min->setTimezone( $timezone );
+
+
+            $dt_max = new \DateTime( 'now + '.Rule::DATE_MAX.' year' );
+            $dt_max->setTimezone( $timezone );
+
+
+            $dt_input = new \DateTime( $date );
+
+            if (
+
+                $dt_input >= $dt_min
+                &&
+                $dt_input <= $dt_max
+
+
+            ) 
+            {
+
+                $dt_now = new \DateTime( 'now' );
+                $dt_now->setTimezone( $timezone );
+
+                
+
+               switch ( (int)$interval ) 
+               {
+
+                    // de 150 anos para cá - até a data atual
+                   case 0:
+                       
+                        if ( $dt_input <= $dt_now ) 
+                        {
+
+                            return $date;
+                            
+                            
+                        } //end if
+                        else 
+                        {
+
+                            return false;
+                            
+                        }//end else
+
+
+                    // da data atual até o limite máximo - até 150 anos daqui pra frente
+                   case 1:
+                       
+                        if ( $dt_input >= $dt_now ) 
+                        {
+
+                            return $date;
+                            
+                            
+                        } //end if
+                        else 
+                        {
+
+                            return false;
+                            
+                        }//end else
+
+                    case 2:
+
+                        //de 150 anos pra cá até o limite maximo (150 anos pra frente)
+                        return $date;
+                    
+                       
+                   
+                  
+               }//end switch
+
+                
+            } //end if
+            else 
+            {
+
+               
+
+                return false;
+                
+            }//end else
+            
+
+            
+
+
+            
+        } //end if
+        else 
+        {   
+
+            
+            return false;
+            
+        }//end else
+        
+
+
+
+
+
+    }//end method
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static function validatePhone( $value, $phone = 1 )
+    {
+
+        $value = trim($value);
+
+        if ( $value != '' ) 
+        {
+
+            if ( (bool)Validate::validateNumber( $value ) ) 
+            {
+
+
+                if ( !(bool)$phone ) 
+                {
+                    //DDD
+
+                    if (
+
+                        (int)$value >= Rule::DDD_MIN
+                        &&
+                        (int)$value <= Rule::DDD_MAX
+    
+                    ) 
+                    {
+    
+                        return $value;
+                        
+                    } //end if
+                    else 
+                    {
+    
+                        return false;
+                        
+                    }//end else
+
+                    
+                } //end if
+                else 
+                {
+
+                    //TELEFONE
+
+                    $length = strlen( $value );
+
+                    if (
+
+                        (int)$length >= Rule::PHONE_LENGHT_MIN
+                        &&
+                        (int)$length <= Rule::PHONE_LENGHT_MAX
+    
+                    ) 
+                    {
+    
+                        return $value;
+                        
+                    } //end if
+                    else 
+                    {
+    
+                        return false;
+                        
+                    }//end else
+
+
+
+                    
+                }//end else
+                
+
+                
+                
+
+                
+            } //end if
+            else 
+            {
+
+                
+
+                return false;
+                
+            }//end else
+            
+
+            
+        } //end if
+        else 
+        {
+
+            return false;
+            
+        }//end else
+        
+
+
+
+    }//end method
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static function validateNumber( $value )
+    {
+
+        $value = trim($value);
+
+
+        if ( $value != '' ) 
+        {
+
+
+            if ( preg_match( '/^[0-9]+$/', $value ) ) 
+            {
+                
+               
+                return $value;
+
+                
+            } //end if
+            else 
+            {
+
+                return false;
+                
+            }//end else
+            
+
+
+
+            
+        }//end if
+        else 
+        {
+
+            return false;
+            
+        }//edn else
+        
+
+
+    }//end method
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static function validateAddressNumber( $value )
+    {
+
+        $value = trim($value);
+
+        if ( $value != '' ) 
+        {
+
+            if( !(bool)Validate::validateNumber( $value ) )
+            {
+
+                return false;
+
+            }//end if
+
+
+            if (
+
+              (int)$value >= Rule::ADDRESS_NUMBER_MIN
+              &&
+              (int)$value <= Rule::ADDRESS_NUMBER_MAX
+
+            ) 
+            {
+
+                return $value;
+                
+            } //end if
+            else 
+            {
+
+                return false;
+                
+            }//end else
+            
+
+
+            
+        } //end if
+        else 
+        {
+
+            return false;
+            
+        }//end else
+        
+
+
+
+    }//end method
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static function sanitizeNumber( $value )
+    {
+
+        $value = trim($value);
+
+        if ( $value != '' ) 
+        {
+
+
+            $value = preg_replace( '/[^0-9]/', '', $value );
+
+
+            if ( $value != '' ) 
+            {
+
+
+                return $value;
+
+                
+            } //end if
+            else 
+            {
+
+                return false;
+                
+            }//end else
+            
+
+
+
+            
+        }//end if
+        else 
+        {
+
+            return false;
+            
+        }//edn else
+        
+
+
+    }//end method
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static function validateCEP( $value )
+    {
+
+        $value = trim($value);
+
+        if ( $value != '' ) 
+        {
+
+
+            /*
+            if( !(bool)Validate::validateNumber( $document ) )
+            {
+                //valores quen ão são formados apenas de numeros
+                return false;
+
+            }//end if
+            */
+
+
+            $value = Validate::sanitizeNumber( $value );
+
+
+            if( is_bool( $value ) && $value === false )
+            {
+                //santiizando e tirando tudo que não for número
+                return false;
+
+            }//end if
+
+
+            if ( (int)strlen($value) === Rule::LENGTH_ZIPCODE ) 
+            {
+
+                return $value;
+                
+            } //end if
+            else 
+            {
+
+                return false;
+                
+            }//end else
+            
+
+
+            
+        } //end if
+        else 
+        {
+
+            return false;
+            
+        }//end else
+        
+
+
+
+
+    }//end method
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static function validateDocument( $document, $type )
+    {
+
+        $document = trim( $document );
+
+        if ( $document != '' ) 
+        {
+
+            
+            /*
+            if( !(bool)Validate::validateNumber( $document ) )
+            {
+                //valores quen ão são formados apenas de numeros
+                return false;
+
+            }//end if
+            */
+
+
+            $document = Validate::sanitizeNumber( $document );
+
+
+            if( is_bool( $document ) && $document === false )
+            {
+                //santiizando e tirando tudo que não for número
+                return false;
+
+            }//end if
+
+
+            
+
+
+            switch ( (int)$type )  
+            {
+                case 0:
+                  
+                    if ( (bool)Validate::validateCPF( $document ) ) 
+                    {
+
+                        return $document;
+                        
+                    } //end if
+                    else 
+                    {
+
+                        return false;
+                        
+                    }//end else
+
+
+
+
+                case 1:
+                
+                    if ( (bool)Validate::validateCNPJ( $document ) ) 
+                    {
+
+                        return $document;
+
+                        
+                    } //end if
+                    else 
+                    {
+
+                        return false;
+                        
+                    }//end else
+                    
+                    
+                
+                
+            }//end switch
+
+            
+
+            
+        } //end if
+        else 
+        {
+
+            return false;
+            
+        }//end else
+        
+
+
+    }//end method
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static function validateCPF( $document )
+    {
+
+        $document = trim($document);
+
+        if( $document != '' )
+        {
+
+            if (strlen($document) != 11) return false;
+        
+
+            for ($i = 0, $j = 10, $sum = 0; $i < 9; $i++, $j--)
+                $sum += $document[$i] * $j;
+            $rest = $sum % 11;
+            if ($document[9] != ($rest < 2 ? 0 : 11 - $rest))
+                return false;
+
+            for ($i = 0, $j = 11, $sum = 0; $i < 10; $i++, $j--)
+                $sum += $document[$i] * $j;
+            $rest = $sum % 11;
+
+            return ($document[10] == ($rest < 2 ? 0 : 11 - $rest));
+
+
+        }//end if
+        else
+        {
+
+            return false;
+
+
+
+        }//end else
+
+
+        
+
+    }//end method
+
+
+
+
+
+
+
+
+
+
+    public static function validateCNPJ( $document )
+    {
+            
+        $document = trim($document);
+
+        if( $document != '' )
+        {
+
+            // Valida tamanho
+            if (strlen($document) != 14)
+                return false;
+            // Valida primeiro dígito verificador
+            for ($i = 0, $j = 5, $sum = 0; $i < 12; $i++)
+            {
+                $sum += $document[$i] * $j;
+                $j = ($j == 2) ? 9 : $j - 1;
+            }
+
+            $rest = $sum % 11;
+            if ($document[12] != ($rest < 2 ? 0 : 11 - $rest))
+                return false;
+            // Valida segundo dígito verificador
+
+            for ($i = 0, $j = 6, $sum = 0; $i < 13; $i++)
+            {
+                $sum += $document[$i] * $j;
+                $j = ($j == 2) ? 9 : $j - 1;
+            }
+
+            $rest = $sum % 11;
+
+            return $document[13] == ($rest < 2 ? 0 : 11 - $rest);
+
+
+        }//end if
+        else
+        {
+
+            return false;
+
+
+
+        }//end else
+
+
+    }//end method
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -7,6 +7,15 @@
             Dashboard <span class="sr-only">(current)</span>
           </a>
         </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/dashboard/meus-dados">
+            <span data-feather="user"></span>
+            Meus Dados
+          </a>
+        </li>
+
+
         <li class="nav-item">
           <a class="nav-link" href="/dashboard/produtos">
             <span data-feather="file"></span>

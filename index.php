@@ -13,6 +13,7 @@ $app->config('debug', true);
 
 //functions.php tem que ficar em cima de todas as outras rotas
 require_once("functions.php");
+require_once("ajax.php");
 
 
 require_once("admin-recovery.php");
@@ -24,6 +25,7 @@ require_once("admin.php");
 
 
 
+require_once("dashboard-persons.php");
 require_once("dashboard.php");
 
 

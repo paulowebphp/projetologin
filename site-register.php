@@ -48,6 +48,17 @@ $app->post('/cadastrar', function () {
   }//end if
 
 
+  if( !Validate::validateLength( $desperson, Rule::NAME_LENGHT_MAX ) )
+    {
+
+        User::setError(Rule::ERROR_NAME_LENGTH);
+        header("Location: /cadastrar");
+        exit;
+
+    }//end if
+  
+
+
   if( !Validate::validateFullName( $desperson ) )
   {
 
