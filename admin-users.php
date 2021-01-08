@@ -20,8 +20,10 @@ $app->post('/487733admin/usuarios/editar/:hash', function ($hash) {
 
   $iduser = Validate::getHash($hash);
 
+  
 
-  if( $iduser == '' )
+
+  if( is_bool( $iduser ) && $iduser === false )
   {
 
     User::setError(Rule::ERROR_USER);
@@ -29,6 +31,8 @@ $app->post('/487733admin/usuarios/editar/:hash', function ($hash) {
     exit;
 
   }//end if
+
+  
 
 
 
@@ -234,8 +238,6 @@ $app->post('/487733admin/usuarios/editar/:hash', function ($hash) {
 
 
 
-
-
 $app->get('/487733admin/usuarios/editar/:hash', function ($hash) {
 
   User::verifyLogin();
@@ -245,7 +247,10 @@ $app->get('/487733admin/usuarios/editar/:hash', function ($hash) {
 
   $iduser = Validate::getHash($hash);
 
-  if( $iduser == '' )
+  
+
+
+  if( is_bool( $iduser ) && $iduser === false )
   {
 
     User::setError(Rule::ERROR_USER);
@@ -254,10 +259,34 @@ $app->get('/487733admin/usuarios/editar/:hash', function ($hash) {
 
   }//end if
 
+  if( !is_numeric( $iduser ) )
+  {
+
+    User::setError(Rule::ERROR_USER);
+    header("Location: /487733admin/usuarios");
+    exit;
+
+  }//end if
+
+  
+
+
+
+
+
 
   $regularUser = new User();
 
   $regularUser->get( (int)$iduser );
+
+  if( (int)$regularUser->getiduser() === 0 )
+  {
+
+    User::setError(Rule::ERROR_USER);
+    header("Location: /487733admin/usuarios");
+    exit;
+
+  }//end if
   
 
   
@@ -305,7 +334,16 @@ $app->post('/487733admin/usuarios/mudar-senha/:hash', function ($hash) {
 
   $iduser = Validate::getHash($hash);
 
-  if( $iduser == '' )
+  if( is_bool( $iduser ) && $iduser === false )
+  {
+
+    User::setError(Rule::ERROR_USER);
+    header("Location: /487733admin/usuarios");
+    exit;
+
+  }//end if
+
+  if( !is_numeric( $iduser ) )
   {
 
     User::setError(Rule::ERROR_USER);
@@ -315,7 +353,7 @@ $app->post('/487733admin/usuarios/mudar-senha/:hash', function ($hash) {
   }//end if
 
 
-
+  
 
 
 
@@ -377,6 +415,15 @@ $app->post('/487733admin/usuarios/mudar-senha/:hash', function ($hash) {
 
   $regularUser->get( (int)$iduser );
 
+  if( (int)$regularUser->getiduser() === 0 )
+  {
+
+    User::setError(Rule::ERROR_USER);
+    header("Location: /487733admin/usuarios");
+    exit;
+
+  }//end if
+
 
   $regularUser->setdespassword( User::setPasswordHashing( $new_pass ) );
 
@@ -435,7 +482,7 @@ $app->get('/487733admin/usuarios/mudar-senha/:hash', function ($hash) {
 
   $iduser = Validate::getHash($hash);
 
-  if( $iduser == '' )
+  if( is_bool( $iduser ) && $iduser === false )
   {
 
     User::setError(Rule::ERROR_USER);
@@ -445,11 +492,31 @@ $app->get('/487733admin/usuarios/mudar-senha/:hash', function ($hash) {
   }//end if
 
 
+  if( !is_numeric( $iduser ) )
+  {
+
+    User::setError(Rule::ERROR_USER);
+    header("Location: /487733admin/usuarios");
+    exit;
+
+  }//end if
+
+
+  
+
+
   $regularUser = new User();
 
   $regularUser->get( (int)$iduser );
   
+  if( (int)$regularUser->getiduser() === 0 )
+  {
 
+    User::setError(Rule::ERROR_USER);
+    header("Location: /487733admin/usuarios");
+    exit;
+
+  }//end if
   
 
   

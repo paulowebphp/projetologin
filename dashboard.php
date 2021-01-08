@@ -53,9 +53,6 @@ $app->get('/dashboard/produtos', function () {
 $app->get('/dashboard', function () {
 
 
- 
-
-
   User::verifyLogin(false);
 
   $user = User::getFromSession();
@@ -67,9 +64,9 @@ $app->get('/dashboard', function () {
 
   $page->setTpl("index",[
 
-    'user'=>$user->getData()
-
-
+    'user'=>$user->getData(),
+    'success'=>$user->getSuccess(),
+    'error'=>User::getError()
 
   ]);
 

@@ -17,7 +17,7 @@ require_once("ajax.php");
 
 
 require_once("admin-recovery.php");
-require_once("admin-managers.php");
+require_once("admin-password.php");
 require_once("admin-users.php");
 require_once("admin-login.php");
 require_once("admin.php");
@@ -25,6 +25,7 @@ require_once("admin.php");
 
 
 
+require_once("dashboard-password.php");
 require_once("dashboard-persons.php");
 require_once("dashboard.php");
 
@@ -32,6 +33,7 @@ require_once("dashboard.php");
 
 
 require_once("site-endpoint.php");
+require_once("site-recovery.php");
 require_once("site-register.php");
 require_once("site-login.php");
 require_once("site.php");

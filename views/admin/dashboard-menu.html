@@ -20,9 +20,9 @@
 
 
         <li class="nav-item">
-          <a class="nav-link" href="/487733admin/administrador">
-            <span data-feather="user-check"></span>
-            Administrador
+          <a class="nav-link" href="/487733admin/mudar-senha">
+            <span data-feather="lock"></span>
+            Mudar Senha
           </a>
         </li>
 

@@ -5,6 +5,7 @@ namespace Main\Model;
 use \Main\DB\Sql;
 use \Main\Model;
 use \Main\Rule;
+use \Main\Validate;
 use \Main\Mailer;
 
 
@@ -656,7 +657,16 @@ class User extends Model
                 );
 
 
-                $code = base64_encode( $iv . $encryptedMessage );
+                $code = Validate::setHash( $iv . $encryptedMessage );
+
+                if( is_bool( $code ) && $code === false )
+                {
+
+                    throw new \Exception( Rule::ERROR_SET_RECOVERY );
+
+                }//end if
+
+
 
 
                 if ( !$inadmin ) 
@@ -691,7 +701,7 @@ class User extends Model
 
                     Rule::EMAIL_RECOVERY_SUBJECT,
 
-                    "users-managers-recovery",
+                    "recovery",
                     
 
                     array(
@@ -810,10 +820,22 @@ class User extends Model
     public static function getRecovery( $code )
     {
 
+        
+        
+        $ivAndEncryptedMessage = Validate::getHash( $code );
+
+        if( is_bool( $ivAndEncryptedMessage ) && $ivAndEncryptedMessage === false )
+        {
+
+            throw new \Exception( Rule::ERROR_GET_RECOVERY );
+
+        }//end if
+
 
         
-        $ivAndEncryptedMessage = base64_decode( $code );
 
+
+        
 
         $iv = mb_substr(
 
@@ -867,6 +889,9 @@ class User extends Model
         );
 
 
+        
+
+  
 
         if( (int)$idrecovery === 0 )
         {

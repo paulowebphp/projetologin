@@ -22,7 +22,9 @@ $app->get('/487733admin', function () {
 
   $page->setTpl("index", [
 
-    'user'=>$user->getData()
+    'user'=>$user->getData(),
+    'success'=>User::getSuccess(),
+    'error'=>User::getError()
 
 
   ]);

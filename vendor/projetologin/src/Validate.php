@@ -3033,8 +3033,21 @@ class Validate
         try 
         {
 
+          
+            $value = base64_encode( $value );
 
-            return base64_encode( $value );
+
+            if ( $value == false ) 
+            {
+                return false;
+
+            }//end if
+
+
+            $value = strtr( $value, '+/', '-_' );
+
+
+            return rtrim( $value, '=' );
 
 
 
@@ -3043,7 +3056,7 @@ class Validate
         catch (\Exception $e) 
         {
 
-            return '';
+            return false;
             
         }//end catch
 
@@ -3068,8 +3081,31 @@ class Validate
         try 
         {
 
+           
+            
+            
 
-            return base64_decode( $value );
+            $value = strtr( $value, '-_', '+/' );
+
+        
+
+            
+
+            $value = base64_decode( $value );
+
+
+            
+
+            
+
+
+            if ( $value == false )  
+            {
+                return false;
+
+            }//end if
+
+            return $value;
 
 
 
@@ -3078,7 +3114,7 @@ class Validate
         catch (\Exception $e) 
         {
 
-            return '';
+            return false;
             
         }//end catch
 
