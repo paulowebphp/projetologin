@@ -127,7 +127,7 @@
 
 
               <td>
-                <a href='/dashboard/loja/editar/<?php echo setHash($value1["idproduct"]); ?>'>
+                <a href='/dashboard/loja/<?php echo setHash($value1["idproduct"]); ?>'>
                   <button class="btn btn-secondary">
                     Editar
                   </button>
@@ -137,7 +137,7 @@
        
 
        
-                <a href='/dashboard/loja/deletar/<?php echo setHash($value1["idproduct"]); ?>'>
+                <a onclick="return confirm('Deseja realmente excluir este item?')" href='/dashboard/loja/deletar/<?php echo setHash($value1["idproduct"]); ?>'>
                   <button class="btn btn-danger">
                     Deletar
                   </button>

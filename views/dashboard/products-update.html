@@ -1,0 +1,125 @@
+<div class="container-fluid">
+  <div class="row">
+
+    {include="dashboard-menu"} 
+
+    <main role="main" class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Dashboard - {$user.deslogin}</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group mr-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+          </div>
+          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <span data-feather="calendar"></span>
+            This week
+          </button>
+        </div>
+      </div>
+
+
+      
+
+
+      <section>
+
+        <div class="container">
+
+
+            <form id="dash-form" action='/dashboard/loja/{function="setHash($product.idproduct)"}' method="post">
+
+
+                <div class="row">
+
+                    <div class="col-12">
+
+                        <h2>Editar Produto</h2>
+
+                        {if="$error"}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {$error}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        {/if}
+
+                        
+
+
+                    </div>
+
+
+                </div>
+
+
+
+
+
+
+                <div class="row">
+
+                    <div class="col-md-6 col-12">
+
+    
+                        <div class="mb-3">
+                        <label for="desproduct" class="form-label">Nome</label>
+                        <input type="text" class="form-control" name="desproduct" id="desproduct" value="{$product.desproduct}">
+                        </div>
+
+
+
+                        <div class="mb-3">
+                        <label for="vlprice" class="form-label">Valor</label>
+                        <input type="number" min="20.00" max="20000.00" step="0.01" class="form-control" name="vlprice" id="vlprice" value="{$product.vlprice}">
+                        </div>
+
+
+                                  
+
+                        
+
+                    </div>
+
+
+                    <div class="col-md-6 col-12">
+                        
+
+                        &nbsp;
+
+
+
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+                <div class="row">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+
+                        <a class="btn btn-danger" href="/dashboard/loja">Voltar</a>
+                    </div>
+                </div>
+
+
+
+            </form>
+
+        </div>
+
+
+      </section>
+
+
+
+
+    </main>
+
+    
+  </div>
+</div>

@@ -48,6 +48,8 @@ class Rule
     
 
     const ERROR_USER = "Usuário inválido";
+    
+
 
     const ERROR_BOOL = "Envie um valor válido";
     const VALIDATE_BOOL = "O valor enviado deve ser 0 ou 1";
@@ -205,7 +207,7 @@ class Rule
    const PRICE_MIN = 20.00;
 
 
-
+   const ID_PRODUCT = "Produto inválido | Clique novamente no botão Editar do Produto que você deseja Editar";
 
 
 

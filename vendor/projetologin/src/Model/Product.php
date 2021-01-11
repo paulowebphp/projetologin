@@ -104,6 +104,178 @@ class Product extends Model
 
 
 
+    
+
+
+
+    public function get( $idproduct, $iduser )
+    {
+
+        
+
+        $sql = new Sql();
+
+        $query = "
+        
+            SELECT * FROM tb_products a
+            INNER JOIN tb_users b ON a.iduser = b.iduser
+            WHERE a.iduser = :iduser AND a.idproduct = :idproduct
+            ORDER BY a.dtregister DESC
+            LIMIT 1;
+        
+        
+        ";
+
+
+        $results = $sql->select( $query, [
+
+            ':iduser'=>$iduser,
+            ':idproduct'=>$idproduct
+
+        ]);
+
+
+        
+
+        
+
+        if( count($results) > 0 )
+        {
+
+            $this->setData( $results[0] );
+
+        }//end if
+
+
+
+    }//end method
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function delete()
+    {
+
+        $sql = new Sql();
+
+        $query = "
+        
+            DELETE FROM tb_products
+            WHERE idproduct = :idproduct
+        
+        
+        ";
+
+
+        $sql->query( $query, [
+
+            ':idproduct'=>$this->getidproduct()
+
+        ]);
+
+
+
+    }//end method
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
