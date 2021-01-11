@@ -8,42 +8,6 @@ use \Main\Model\User;
 
 
 
-$app->get('/dashboard/produtos', function () {
-
-
-  
-
-
-  User::verifyLogin(false);
-
-  $user = User::getFromSession();
-
-
-
-
-  $page = new PageDashboard();
-
-  $page->setTpl("products",[
-
-    'user'=>$user->getData()
-
-
-
-  ]);
-
-
-});//end route
-
-
-
-
-
-
-
-
-
-
-
 
 
 

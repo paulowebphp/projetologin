@@ -63,6 +63,18 @@ function getHash( $value )
 
 
 
+function formatPrice( $value )
+{
+
+
+    if( (int)$value === 0 ) $value = 0;
+
+    return number_format( $value, 2, ",", "." );
+
+
+
+}//end function
+
 
 
 

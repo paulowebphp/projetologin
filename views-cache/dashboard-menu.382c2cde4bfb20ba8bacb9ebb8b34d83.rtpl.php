@@ -17,9 +17,9 @@
 
 
         <li class="nav-item">
-          <a class="nav-link" href="/dashboard/produtos">
-            <span data-feather="file"></span>
-            Produtos
+          <a class="nav-link" href="/dashboard/loja">
+            <span data-feather="shopping-bag"></span>
+            Loja
           </a>
         </li>
         <li class="nav-item">

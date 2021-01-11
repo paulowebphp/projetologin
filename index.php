@@ -25,6 +25,7 @@ require_once("admin.php");
 
 
 
+require_once("dashboard-products.php");
 require_once("dashboard-password.php");
 require_once("dashboard-persons.php");
 require_once("dashboard.php");

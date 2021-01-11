@@ -600,45 +600,16 @@ $app->get('/487733admin/usuarios', function () {
 
 
   
+  $pagination = User::getPagination( $search, $page, Rule::ITENS_PER_PAGE_ADMIN, 0 );
 
-
-  if ( $search == '' ) 
-  {
-
-    $pagination = User::getPage( $page, Rule::ITENS_PER_PAGE, 0 );
-
-    if( is_bool( $pagination ) && $pagination === false )
-    {
-
-      $page = 1;
-      $pagination = User::getPage( $page, Rule::ITENS_PER_PAGE, 0 );
-
-    }//end if
-
-    
-  } //end if
-  else 
-  {
-
-
-    $pagination = User::getPageSearch( $search, $page, Rule::ITENS_PER_PAGE, 0 );
-
-
-    if( is_bool( $pagination ) && $pagination === false )
-    {
-
-      $page = 1;
-      $pagination = User::getPageSearch( $search, $page, Rule::ITENS_PER_PAGE, 0 );
-
-      
-    }//end if
-
-    
-  }//end else
+ 
+  
+  
+  
   
 
   $pages = [];
-  $url_query = [];
+  $url_params = [];
 
   for ($x=0; $x < $pagination['pages']; $x++) 
   { 
@@ -646,7 +617,7 @@ $app->get('/487733admin/usuarios', function () {
     if ( $search == '' ) 
     {
 
-      $url_query = [
+      $url_params = [
 
         'pagina'=>$x+1
 
@@ -657,7 +628,7 @@ $app->get('/487733admin/usuarios', function () {
     else 
     {
 
-      $url_query = [
+      $url_params = [
 
         'pagina'=>$x+1,
         'buscar'=>$search
@@ -669,7 +640,7 @@ $app->get('/487733admin/usuarios', function () {
 
     array_push( $pages, [
 
-      'href'=>'/487733admin/usuarios?' . http_build_query( $url_query ),
+      'href'=>'/487733admin/usuarios?' . http_build_query( $url_params ),
 
       'page_number'=>$x+1
 

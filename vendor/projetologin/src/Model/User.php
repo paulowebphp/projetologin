@@ -1778,10 +1778,7 @@ class User extends Model
 
 
 
-
-
-
-    public static function getPageSearch( $search, $page = 1, $itensPerPage = 10, $inadmin = 0 )
+    public static function getPagination( $search, $page = 1, $itensPerPage = 10, $inadmin = 0 )
     {
         
 
@@ -1789,75 +1786,140 @@ class User extends Model
 
         $sql = new Sql();
 
-        if ( !(bool)$inadmin ) 
+
+        $params = [];
+
+
+
+
+        if ( $search == '' ) 
         {
-            //USARIOS COMUNS
-            $query = "
-        
-                SELECT SQL_CALC_FOUND_ROWS * 
-                FROM tb_users a
-                INNER JOIN tb_persons b ON a.idperson = b.idperson
-                INNER JOIN tb_addresses c ON a.iduser = c.iduser
-                WHERE a.inadmin = :inadmin AND a.deslogin = :search OR b.desperson LIKE :searchlike
-                ORDER BY a.dtregister DESC
-                LIMIT $start, $itensPerPage;
+
+            //NÃO ESTÁ SENDO REALLIZADA UMA BUSCA
+            if ( !(bool)$inadmin ) 
+            {
+                //USARIOS COMUNS
+                $query = "
             
+                    SELECT SQL_CALC_FOUND_ROWS * 
+                    FROM tb_users a
+                    INNER JOIN tb_persons b ON a.idperson = b.idperson
+                    INNER JOIN tb_addresses c ON a.iduser = c.iduser
+                    WHERE a.inadmin = :inadmin
+                    ORDER BY a.dtregister DESC
+                    LIMIT $start, $itensPerPage;
+                
+                
+                ";
+                
+            } //end if
+            else 
+            {
+                //USUARIOS ADMINISTRADORES
+                $query = "
             
-            ";
+                    SELECT SQL_CALC_FOUND_ROWS * 
+                    FROM tb_users a
+                    INNER JOIN tb_persons b ON a.idperson = b.idperson
+                    WHERE a.inadmin = :inadmin
+                    ORDER BY a.dtregister DESC
+                    LIMIT $start, $itensPerPage;
+                
+                
+                ";
+                
+            }//end else
+
+
+            $params = [
+
+                ':inadmin'=>$inadmin
+    
+            ];
+
+
+
             
         } //end if
         else 
         {
-            //USUARIOS ADMINISTRADORES
-            $query = "
-        
-                SELECT SQL_CALC_FOUND_ROWS * 
-                FROM tb_users a
-                INNER JOIN tb_persons b ON a.idperson = b.idperson
-                WHERE a.inadmin = :inadmin AND a.deslogin = :search OR b.desperson LIKE :searchlike
-                ORDER BY a.dtregister DESC
-                LIMIT $start, $itensPerPage;
+
+            //ESTÁ SENDO REALLIZADA UMA BUSCA
+
+            if ( !(bool)$inadmin ) 
+            {
+                //USARIOS COMUNS
+                $query = "
             
+                    SELECT SQL_CALC_FOUND_ROWS * 
+                    FROM tb_users a
+                    INNER JOIN tb_persons b ON a.idperson = b.idperson
+                    INNER JOIN tb_addresses c ON a.iduser = c.iduser
+                    WHERE a.inadmin = :inadmin AND a.deslogin = :search 
+                    OR a.inadmin = :inadmin AND b.desperson LIKE :searchlike
+                    ORDER BY a.dtregister DESC
+                    LIMIT $start, $itensPerPage;
+                
+                
+                ";
+                
+            } //end if
+            else 
+            {
+                //USUARIOS ADMINISTRADORES
+                $query = "
             
-            ";
+                    SELECT SQL_CALC_FOUND_ROWS * 
+                    FROM tb_users a
+                    INNER JOIN tb_persons b ON a.idperson = b.idperson
+                    WHERE a.inadmin = :inadmin AND a.deslogin = :search
+                    OR a.inadmin = :inadmin AND b.desperson LIKE :searchlike
+                    ORDER BY a.dtregister DESC
+                    LIMIT $start, $itensPerPage;
+                
+                
+                ";
+                
+            }//end else
+
+
+            $params = [
+
+                ':inadmin'=>$inadmin,
+                ':search'=>$search,
+                ':searchlike'=>'%'.$search.'%'
+    
+    
+            ];
+
+
+
             
         }//end else
         
 
+
+
+
+        
+        
+
       
-        $results = $sql->select( $query, [
-
-            ':inadmin'=>$inadmin,
-            ':search'=>$search,
-            ':searchlike'=>'%'.$search.'%',
-
-
-        ]);
+        $results = $sql->select( $query, $params );
 
        
         $results2 = $sql->select("SELECT FOUND_ROWS() AS nrtotal");
 
         
 
-        if( count($results) > 0 )
-        {
+        return [
 
-            return [
+            'results'=>$results,
+            'nrtotal'=>(int)$results2[0]['nrtotal'],
+            'pages'=>(int)ceil( $results2[0]['nrtotal']/$itensPerPage )
 
-                'results'=>$results,
-                'nrtotal'=>(int)$results2[0]['nrtotal'],
-                'pages'=>(int)ceil( $results2[0]['nrtotal']/$itensPerPage )
-
-            ];
-
-
-        }//end if
-        else
-        {
-
-            return false;
-
-        }//end else
+        ];
+        
 
         
         
@@ -1918,179 +1980,7 @@ class User extends Model
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public static function getPage( $page = 1, $itensPerPage = 10, $inadmin = 0 )
-    {
-
-
-        $start = ( $page - 1 )*$itensPerPage;
-
-        $sql = new Sql();
-
-        if ( !(bool)$inadmin ) 
-        {
-            //USARIOS COMUNS
-            $query = "
-        
-                SELECT SQL_CALC_FOUND_ROWS * 
-                FROM tb_users a
-                INNER JOIN tb_persons b ON a.idperson = b.idperson
-                INNER JOIN tb_addresses c ON a.iduser = c.iduser
-                WHERE a.inadmin = :inadmin
-                ORDER BY a.dtregister DESC
-                LIMIT $start, $itensPerPage;
-            
-            
-            ";
-            
-        } //end if
-        else 
-        {
-            //USUARIOS ADMINISTRADORES
-            $query = "
-        
-                SELECT SQL_CALC_FOUND_ROWS * 
-                FROM tb_users a
-                INNER JOIN tb_persons b ON a.idperson = b.idperson
-                WHERE a.inadmin = :inadmin
-                ORDER BY a.dtregister DESC
-                LIMIT $start, $itensPerPage;
-            
-            
-            ";
-            
-        }//end else
-        
-
-      
-        $results = $sql->select( $query, [
-
-            ':inadmin'=>$inadmin
-
-        ]);
-
-       
-        $results2 = $sql->select("SELECT FOUND_ROWS() AS nrtotal");
-
-        
-
-        if( count($results) > 0 )
-        {
-
-            return [
-
-                'results'=>$results,
-                'nrtotal'=>(int)$results2[0]['nrtotal'],
-                'pages'=>(int)ceil( $results2[0]['nrtotal']/$itensPerPage )
-
-            ];
-
-
-        }//end if
-        else
-        {
-
-            return false;
-
-        }//end else
-
-        
-        
-
-
-
-
-
-
-    }//end method
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 
 
 

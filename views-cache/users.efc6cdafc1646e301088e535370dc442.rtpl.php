@@ -47,6 +47,8 @@
       <?php } ?>
       
 
+      <?php if( $nrtotal > 0 ){ ?>
+
       <div class="table-responsive">
         <table class="table table-striped table-sm">
 
@@ -247,6 +249,36 @@
 
         </table>
       </div>
+
+      <?php }else{ ?>
+
+        <?php if( $search != '' ){ ?>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="alert alert-info">
+              Nenhum usuário foi encontrado.
+            </div>
+          </div>
+        </div>
+
+
+        <?php }else{ ?>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="alert alert-info">
+              Não há usuários cadastrados.
+            </div>
+          </div>
+        </div>
+
+
+
+        <?php } ?>
+
+
+      <?php } ?>
 
 
 

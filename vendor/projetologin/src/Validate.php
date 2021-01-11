@@ -634,6 +634,230 @@ class Validate
 
 
 
+    public static function validatePrice( $value )
+    {
+
+
+        $value = trim($value);
+
+        if ( $value != '' )
+        {
+
+
+            if ( preg_match( '/^[0-9\.\,]+$/', $value ) ) 
+            {
+                
+                $value = preg_replace( '/[\,]/', '.', $value );
+
+                if (
+
+
+                    !preg_match( '/\.\./', $value )
+                    &&
+                    $value[0] != '.'
+                    &&
+                    substr( $value, -1 ) != '.'
+
+
+                ) 
+                {
+
+                    $countDot = substr_count( $value, '.' );
+
+
+                    if( (int)$countDot >= 1 )
+                    {
+
+                        //TEM 1 OU MAIS PONTOS
+
+
+
+                        $lastDotPosition = strrpos( $value, '.' );
+                        /*Verifica a posição do último ponto*/
+
+                        $integer = substr( $value, 0, $lastDotPosition );
+                        $decimal = substr( $value, $lastDotPosition+1 );
+                        /*
+                        Usa a posição do último ponto para dividiar a String na
+                        Parte Inteira ($integer) e na Parte Decimal ($decimal) 
+                        */
+
+
+                        $integer = preg_replace( '/\./', '', $integer );
+                        /*Tira os pontos da parte inteira */  
+
+
+                        $decimalLenght = strlen($decimal);
+                        /*Pega o comprimento da Parte Decimal */    
+
+                        if ( (int)$decimalLenght === 2 ) 
+                        {
+
+                            //REMONTANDO O VALUE
+
+                            $value = $integer . "." . $decimal;
+
+
+                            
+                        } //end if
+                        else 
+                        {
+
+                            return false;
+                            
+                        }//end else
+                        
+
+
+
+                        
+
+
+
+                    }//end if
+                    elseif( (int)$countDot === 0 )
+                    {
+
+                        //NÃO TEM PONTOS
+                        $value = $value . ".00";
+
+
+                    }//end elseif
+                    else
+                    {
+                        return false;
+
+                    }//end else
+
+                    
+
+
+                    
+                } //end if
+                else 
+                {
+
+                    return false;
+                    
+                }//end else
+                
+
+               
+                
+
+
+
+            } //end if
+            else 
+            {
+
+                return false;
+                
+            }//end else
+            
+
+            
+            
+
+            
+        } //end if
+        else 
+        {
+
+            return false;
+            
+        }//end else
+
+
+
+        if (
+
+            (float)$value >= Rule::PRICE_MIN
+            &&
+            (float)$value <= Rule::PRICE_MAX
+
+
+        ) 
+        {
+
+            return $value;
+            
+        } //end if
+        else 
+        {
+
+            return false;
+            
+        }//end else
+        
+
+
+
+        
+        
+
+
+
+
+    }//end method
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

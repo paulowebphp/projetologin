@@ -52,13 +52,17 @@ class Rule
     const ERROR_BOOL = "Envie um valor válido";
     const VALIDATE_BOOL = "O valor enviado deve ser 0 ou 1";
 
+    const CREATE_ITEM = "Item criado";
     const UPDATE_ITEM = "Item alterado";
     const UPDATE_DATA = "Dados alterados";
 
     const PAGINATION_MIN = 1;
     const PAGINATION_MAX = 1000000000;
 
-    const ITENS_PER_PAGE = 10;
+    const ITENS_PER_PAGE_ADMIN = 10;
+    const ITENS_PER_PAGE_DASHBOARD = 10;
+
+
 
     const DOMAIN_PRODUCTION = "https://projetologin.com.br";
     const URI_ADMIN = "487733admin";
@@ -175,8 +179,36 @@ class Rule
 	const DESCOUNTRYCODE = "BRA";
 	const NR_COUNTRY_AREA = 55;
 
- 	
+
+
+    const MAX_PRODUCTS_FREE = "1000"; //VALOR QUE ESTAMOS UTILIZANDO NA PRATICA PARA OS USUARIOS COMUNS DO SISTEMA
+    
+    const MAX_PRODUCTS_BASIC = "1000";
+	const MAX_PRODUCTS_INTERMEDIATE = "2000";
+    const MAX_PRODUCTS_ADVANCED = "5000";
+    
+
+    const VALIDATE_MAX_PRODUCTS = "Você não pode criar um produto pois atingiu o limite máximo permitido | Em caso de dúvida, entre em contato com o Suporte";
    
+
+    const ERROR_PRODUCT = "Insira o nome do produto";
+    const VALIDATE_PRODUCT = "O nome do produto não pode conter caracteres especiais ou números | Por favor, tente novamente";
+    const PRODUCT_LENGHT_MAX = 64;
+    const ERROR_PRODUCT_LENGTH = "O nome do produto deve ter entre 3 e 64 caracteres | Por favor, tente novamente";
+
+
+    const ERROR_PRICE = "Insira o valor do produto";
+    const VALIDATE_PRICE = "O valor do produto não pode conter caracteres especiais ou letras e deve ser entre R$ 20,00 e R$ 20.000,00 | Por favor, tente novamente";
+    
+
+   const PRICE_MAX = 20000.00;
+   const PRICE_MIN = 20.00;
+
+
+
+
+
+
 
 }//end Class
 
