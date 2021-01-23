@@ -11,315 +11,6 @@ use \Main\Model\User;
 
 
 
-$app->post('/487733admin/usuarios/editar/:hash', function ($hash) {
-
-  User::verifyLogin();
-
-  $user = User::getFromSession();
-
-
-  $iduser = Validate::getHash($hash);
-
-  
-
-
-  if( is_bool( $iduser ) && $iduser === false )
-  {
-
-    User::setError(Rule::ERROR_USER);
-    header("Location: /487733admin/usuarios");
-    exit;
-
-  }//end if
-
-  
-
-
-
-
-
-
-
-
-
-
-  if( !isset($_POST['inseller']) || $_POST['inseller'] == '' )
-  {
-
-    User::setError(Rule::ERROR_BOOL);
-    header("Location: /487733admin/usuarios/editar/".$hash);
-    exit;
-
-  }//end if
-
-
-
-  if( ( $inseller = Validate::validateBoolean( $_POST['inseller'] ) ) === false )
-  {
-
-    User::setError(Rule::VALIDATE_BOOL);
-    header("Location: /487733admin/usuarios/editar/".$hash);
-    exit;
-
-  }//end if
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  if( !isset($_POST['inbuyer']) || $_POST['inbuyer'] == '' )
-  {
-
-    User::setError(Rule::ERROR_BOOL);
-    header("Location: /487733admin/usuarios/editar/".$hash);
-    exit;
-
-  }//end if
-
-
-
-  if( ( $inbuyer = Validate::validateBoolean( $_POST['inbuyer'] ) ) === false )
-  {
-
-    User::setError(Rule::VALIDATE_BOOL);
-    header("Location: /487733admin/usuarios/editar/".$hash);
-    exit;
-
-  }//end if
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  if( !isset($_POST['instatus']) || $_POST['instatus'] == '' )
-  {
-
-    User::setError(Rule::ERROR_BOOL);
-    header("Location: /487733admin/usuarios/editar/".$hash);
-    exit;
-
-  }//end if
-
-
-
-  if( ( $instatus = Validate::validateBoolean( $_POST['instatus'] ) ) === false )
-  {
-
-    User::setError(Rule::VALIDATE_BOOL);
-    header("Location: /487733admin/usuarios/editar/".$hash);
-    exit;
-
-  }//end if
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  if( !isset($_POST['inautostatus']) || $_POST['inautostatus'] == '' )
-  {
-
-    User::setError(Rule::ERROR_BOOL);
-    header("Location: /487733admin/usuarios/editar/".$hash);
-    exit;
-
-  }//end if
-
-
-
-  if( ( $inautostatus = Validate::validateBoolean( $_POST['inautostatus'] ) ) === false )
-  {
-
-    User::setError(Rule::VALIDATE_BOOL);
-    header("Location: /487733admin/usuarios/editar/".$hash);
-    exit;
-
-  }//end if
-
-
-
-
- 
-
-
-  $regularUser = new User();
-
-  $regularUser->get( (int)$iduser );
-
-
-
-  if ( (int)$regularUser->getiduser() > 0 ) 
-  {
-
-
-    $regularUser->setinseller( $inseller );
-    $regularUser->setinbuyer( $inbuyer );
-    $regularUser->setinstatus( $instatus );
-    $regularUser->setinautostatus( $inautostatus );
-
-
-
-    
-    $regularUser->update();
-
-    User::setSuccess(Rule::UPDATE_ITEM);
-    header("Location: /487733admin/usuarios");
-    exit;
-      
-  } //end if
-  else 
-  {
-
-    header("Location: /487733admin/usuarios");
-    exit;
-    
-  }//end else
-  
-
-   
-  
-
-
-
-});//end route
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-$app->get('/487733admin/usuarios/editar/:hash', function ($hash) {
-
-  User::verifyLogin();
-
-  $user = User::getFromSession();
-
-
-  $iduser = Validate::getHash($hash);
-
-  
-
-
-  if( is_bool( $iduser ) && $iduser === false )
-  {
-
-    User::setError(Rule::ERROR_USER);
-    header("Location: /487733admin/usuarios");
-    exit;
-
-  }//end if
-
-  if( !is_numeric( $iduser ) )
-  {
-
-    User::setError(Rule::ERROR_USER);
-    header("Location: /487733admin/usuarios");
-    exit;
-
-  }//end if
-
-  
-
-
-
-
-
-
-  $regularUser = new User();
-
-  $regularUser->get( (int)$iduser );
-
-  if( (int)$regularUser->getiduser() === 0 )
-  {
-
-    User::setError(Rule::ERROR_USER);
-    header("Location: /487733admin/usuarios");
-    exit;
-
-  }//end if
-  
-
-  
-
-  
-
-  
-
-  $page = new PageAdmin();
-
-  $page->setTpl("users-update", [
-
-    'user'=>$user->getData(),
-    'regularUser'=>$regularUser->getData(),
-    'error'=>User::getError()
-
-
-  ]);
-
-
-});//end route
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -465,14 +156,6 @@ $app->post('/487733admin/usuarios/mudar-senha/:hash', function ($hash) {
 
 
 
-
-
-
-
-
-
-
-
 $app->get('/487733admin/usuarios/mudar-senha/:hash', function ($hash) {
 
   User::verifyLogin();
@@ -536,6 +219,329 @@ $app->get('/487733admin/usuarios/mudar-senha/:hash', function ($hash) {
 
 
 });//end route
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$app->post('/487733admin/usuarios/:hash', function ($hash) {
+
+  User::verifyLogin();
+
+  $user = User::getFromSession();
+
+
+  $iduser = Validate::getHash($hash);
+
+  
+
+
+  if( is_bool( $iduser ) && $iduser === false )
+  {
+
+    User::setError(Rule::ERROR_USER);
+    header("Location: /487733admin/usuarios");
+    exit;
+
+  }//end if
+
+  
+
+
+
+
+
+
+
+
+
+
+  if( !isset($_POST['inseller']) || $_POST['inseller'] == '' )
+  {
+
+    User::setError(Rule::ERROR_BOOL);
+    header("Location: /487733admin/usuarios/".$hash);
+    exit;
+
+  }//end if
+
+
+
+  if( ( $inseller = Validate::validateBoolean( $_POST['inseller'] ) ) === false )
+  {
+
+    User::setError(Rule::VALIDATE_BOOL);
+    header("Location: /487733admin/usuarios/".$hash);
+    exit;
+
+  }//end if
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  if( !isset($_POST['inbuyer']) || $_POST['inbuyer'] == '' )
+  {
+
+    User::setError(Rule::ERROR_BOOL);
+    header("Location: /487733admin/usuarios/".$hash);
+    exit;
+
+  }//end if
+
+
+
+  if( ( $inbuyer = Validate::validateBoolean( $_POST['inbuyer'] ) ) === false )
+  {
+
+    User::setError(Rule::VALIDATE_BOOL);
+    header("Location: /487733admin/usuarios/".$hash);
+    exit;
+
+  }//end if
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  if( !isset($_POST['instatus']) || $_POST['instatus'] == '' )
+  {
+
+    User::setError(Rule::ERROR_BOOL);
+    header("Location: /487733admin/usuarios/".$hash);
+    exit;
+
+  }//end if
+
+
+
+  if( ( $instatus = Validate::validateBoolean( $_POST['instatus'] ) ) === false )
+  {
+
+    User::setError(Rule::VALIDATE_BOOL);
+    header("Location: /487733admin/usuarios/".$hash);
+    exit;
+
+  }//end if
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  if( !isset($_POST['inautostatus']) || $_POST['inautostatus'] == '' )
+  {
+
+    User::setError(Rule::ERROR_BOOL);
+    header("Location: /487733admin/usuarios/".$hash);
+    exit;
+
+  }//end if
+
+
+
+  if( ( $inautostatus = Validate::validateBoolean( $_POST['inautostatus'] ) ) === false )
+  {
+
+    User::setError(Rule::VALIDATE_BOOL);
+    header("Location: /487733admin/usuarios/".$hash);
+    exit;
+
+  }//end if
+
+
+
+
+ 
+
+
+  $regularUser = new User();
+
+  $regularUser->get( (int)$iduser );
+
+  if( (int)$regularUser->getiduser() === 0 )
+  {
+
+    User::setError(Rule::ERROR_USER);
+    header("Location: /487733admin/usuarios");
+    exit;
+
+  }//end if
+
+
+
+        
+  $regularUser->setinseller( $inseller );
+  $regularUser->setinbuyer( $inbuyer );
+  $regularUser->setinstatus( $instatus );
+  $regularUser->setinautostatus( $inautostatus );
+
+
+
+  
+  $regularUser->update();
+
+  User::setSuccess(Rule::UPDATE_ITEM);
+  header("Location: /487733admin/usuarios");
+  exit;
+   
+  
+
+
+
+});//end route
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$app->get('/487733admin/usuarios/:hash', function ($hash) {
+
+  User::verifyLogin();
+
+  $user = User::getFromSession();
+
+
+  $iduser = Validate::getHash($hash);
+
+  
+
+
+  if( is_bool( $iduser ) && $iduser === false )
+  {
+
+    User::setError(Rule::ERROR_USER);
+    header("Location: /487733admin/usuarios");
+    exit;
+
+  }//end if
+
+  if( !is_numeric( $iduser ) )
+  {
+
+    User::setError(Rule::ERROR_USER);
+    header("Location: /487733admin/usuarios");
+    exit;
+
+  }//end if
+
+  
+
+
+
+
+
+
+  $regularUser = new User();
+
+  $regularUser->get( (int)$iduser );
+
+  if( (int)$regularUser->getiduser() === 0 )
+  {
+
+    User::setError(Rule::ERROR_USER);
+    header("Location: /487733admin/usuarios");
+    exit;
+
+  }//end if
+  
+
+  
+
+  
+
+  
+
+  $page = new PageAdmin();
+
+  $page->setTpl("users-update", [
+
+    'user'=>$user->getData(),
+    'regularUser'=>$regularUser->getData(),
+    'error'=>User::getError()
+
+
+  ]);
+
+
+});//end route
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

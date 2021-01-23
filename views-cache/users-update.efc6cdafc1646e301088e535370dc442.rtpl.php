@@ -27,7 +27,7 @@
         <div class="container">
 
 
-            <form action='/487733admin/usuarios/editar/<?php echo setHash($regularUser["iduser"]); ?>' method="post">
+            <form action='/487733admin/usuarios/<?php echo setHash($regularUser["iduser"]); ?>' method="post">
 
 
                 <div class="row">

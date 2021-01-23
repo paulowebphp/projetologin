@@ -49,7 +49,12 @@
                     </div>
                     <?php } ?>
 
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                      <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
 
+                    
                     <label for="deslogin" class="sr-only">Email</label>
                     <input type="text" name="deslogin" id="deslogin" class="form-control" placeholder="Email" required autofocus>
                     <label for="despassword" class="sr-only">Senha</label>

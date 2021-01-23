@@ -107,7 +107,7 @@
 
 
               <td>
-                <a href='/487733admin/usuarios/editar/<?php echo setHash($value1["iduser"]); ?>'>
+                <a href='/487733admin/usuarios/<?php echo setHash($value1["iduser"]); ?>'>
                   <button class="btn btn-secondary">
                     Editar
                   </button>

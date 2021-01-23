@@ -72,7 +72,7 @@ $(document).on( 'change', '#state', function(e){
 
 
 
-/*
+
 
 $(document).on( 'mouseover', '#jsbutton', function(e){
 
@@ -104,7 +104,7 @@ $(document).on( 'mouseout', '#jsbutton', function(e){
 
 });
 
-*/
+
 
 
 

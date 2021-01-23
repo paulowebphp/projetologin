@@ -106,8 +106,6 @@ class Product extends Model
 
     
 
-
-
     public function get( $idproduct, $iduser )
     {
 
@@ -117,10 +115,9 @@ class Product extends Model
 
         $query = "
         
-            SELECT * FROM tb_products a
-            INNER JOIN tb_users b ON a.iduser = b.iduser
-            WHERE a.iduser = :iduser AND a.idproduct = :idproduct
-            ORDER BY a.dtregister DESC
+            SELECT * FROM tb_products
+            WHERE iduser = :iduser AND idproduct = :idproduct
+            ORDER BY dtregister DESC
             LIMIT 1;
         
         
@@ -167,6 +164,20 @@ class Product extends Model
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function delete()
     {
 
@@ -185,12 +196,12 @@ class Product extends Model
 
             ':idproduct'=>$this->getidproduct()
 
+
         ]);
 
 
 
     }//end method
-
 
 
 

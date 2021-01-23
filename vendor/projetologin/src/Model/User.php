@@ -56,7 +56,7 @@ class User extends Model
         if( count($results) === 0 )
         {
 
-            if((bool)User::checkLogin()) User::logout();
+            if( (bool)User::checkLogin() ) User::logout();
 
             throw new \Exception( Rule::ERROR_LOGIN );
 
@@ -73,7 +73,6 @@ class User extends Model
             $user = new User();
 
             $user->setData($dataUser);
-
 
 
             if(
@@ -93,7 +92,7 @@ class User extends Model
             }//end if
 
 
-
+            if( (bool)User::checkLogin() ) User::logout();                 
             
             $user->setToSession();
 
@@ -104,7 +103,7 @@ class User extends Model
         else 
         {
 
-            User::logout();
+            if( (bool)User::checkLogin() ) User::logout();
 
             throw new \Exception( Rule::ERROR_LOGIN );
 
