@@ -15,7 +15,14 @@ Este código foi feito utilizando:
 
 
 
-O resultado é um sistema MULTIUSUÁRIO completo, com Níveis de Acesso Administrador e Usuário Comum, Recuperação de Senha Por E-mail, Criptografia, Gerenciamento de Usuários comuns no Admin, e CRUD de 'produtos' na 'Loja' do Usuário Comum
+O resultado é um sistema MULTIUSUÁRIO completo, com: 
+
+<ul>
+    <li>Níveis de Acesso Administrador e Usuário Comum</li>
+    <li>Recuperação de Senha Por E-mail utilizando Criptografia</li>
+    <li>Gerenciamento de Usuários comuns no Admin</li>
+    <li>CRUD de 'produtos' na 'Loja' do Usuário Comum</li>
+</ul>
 
 Fiquem a vontade para baixar e fazerem o que quiserem com esse Código.
 
