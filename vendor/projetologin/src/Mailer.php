@@ -10,7 +10,7 @@ class Mailer
 {
 
     const EMAIL = 'adm@programaremphp.com.br'; //EMAIL QUE DISPARA OS EMAILS
-    const PASSWORD = 'F30]x8?V9]Uo'; 
+    const PASSWORD = 'F30]x8?V9]Uo'; //esta senha já foi trocada
     const NAME = 'Webmaster'; 
 
     //const SET_FROM_EMAIL = 'adm@programaremphp.com.br'; 
