@@ -5,12 +5,12 @@ Este é o repositório do Código feito durante o Curso <strong>"Sistema de Logi
 Este código foi feito utilizando:
 
 <ul>
-    <li>PHP Orientado a Objetos<li>
-    <li>Slim Framework versão 2<li>
-    <li>RainTPL<li>
-    <li>PHPMailer<li>
-    <li>Bootstrap<li>
-    <li>MySQL<li>
+    <li>PHP Orientado a Objetos</li>
+    <li>Slim Framework versão 2</li>
+    <li>RainTPL</li>
+    <li>PHPMailer</li>
+    <li>Bootstrap</li>
+    <li>MySQL</li>
 </ul>
 
 
