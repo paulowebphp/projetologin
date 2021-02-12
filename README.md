@@ -20,7 +20,7 @@ O resultado é um sistema MULTIUSUÁRIO completo, com:
 <ul>
     <li>Níveis de Acesso Administrador e Usuário Comum</li>
     <li>Recuperação de Senha Por E-mail utilizando Criptografia</li>
-    <li>Gerenciamento de Usuários comuns no Admin</li>
+    <li>Gerenciamento de Usuários na Administração</li>
     <li>CRUD de 'produtos' na 'Loja' do Usuário Comum</li>
 </ul>
 
