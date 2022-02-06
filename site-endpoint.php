@@ -11,7 +11,7 @@ use \Main\Model\User;
 $app->get('/endpoint/hash', function () {
 
 
-    $despassword = '87654321';
+    $despassword = '12345678';
 
 
     $hash = User::setPasswordHashing( $despassword );

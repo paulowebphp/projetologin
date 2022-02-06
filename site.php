@@ -74,6 +74,8 @@ $app->get('/sobre', function () {
 
 $app->get('/', function () {
 
+  
+
   $results = User::listAll();
 
   

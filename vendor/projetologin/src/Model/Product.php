@@ -99,11 +99,6 @@ class Product extends Model
 
 
 
-
-
-
-
-
     
 
     public function get( $idproduct, $iduser )
