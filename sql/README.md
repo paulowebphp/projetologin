@@ -1,6 +1,4 @@
-<h2>Sejam bem vindos!</h2>
-
-<p>Fala pessoal!</p>
+<h2>Fala pessoal!</h2>
 
 <p>Este é o Banco de Dados feito durante nosso curso.</p>
 
