@@ -78,7 +78,9 @@ $app->get('/', function () {
 
   $results = User::listAll();
 
-  
+  //echo "<pre>";
+  //var_dump($results);
+  //exit;
 
 
   $page = new Page();
